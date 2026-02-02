@@ -4,11 +4,16 @@ import java.time.Instant;
 import java.util.Set;
 
 import io.smallrye.jwt.build.Jwt;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
+import uce.edu.web.api.auth.config.AuthConfig;
 
 public class AuthResource {
+    @Inject
+    AuthConfig authConfig;
+
   @GET
     @Path("/token")
     public TokenResponse token(
@@ -22,8 +27,8 @@ public class AuthResource {
         boolean ok = true;
         String role = "admin";
         if (ok) {
-            String issuer = "matricula-auth";
-            long ttl = 3600;
+            String issuer = authConfig.issuer();
+            long ttl = authConfig.tokenTtl();
  
             Instant now = Instant.now();
             Instant exp = now.plusSeconds(ttl);
