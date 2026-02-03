@@ -9,4 +9,5 @@ public interface AuthConfig {
 
     @WithName("token.ttl")
     long tokenTtl();
+
 }
