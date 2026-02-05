@@ -8,11 +8,12 @@ import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import uce.edu.web.api.auth.config.AuthConfig;
 import uce.edu.web.api.auth.application.UsuarioService;
 import uce.edu.web.api.auth.application.representation.UsuarioRepresentation;
-
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("/auth")
@@ -25,6 +26,7 @@ public class AuthResource {
 
     @GET
     @Path("/token")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response token(
             @QueryParam("user") String user,
             @QueryParam("password") String password) {
